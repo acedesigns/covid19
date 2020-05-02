@@ -1,0 +1,19 @@
+
+.mat-card-footer {
+  margin-left: -16px;
+  margin-right: -16px;
+  padding: 8px 0;
+}
+
+.mat-card { margin: 3% 0; }
+
+.card-infected {
+  border-bottom: 10px solid rgba(0, 0, 255, 0.5);
+}
+
+.card-recovered {
+  border-bottom: 10px solid rgba(0, 255, 0, 0.5);
+}
+
+.card-deaths {
+  border-bottom: 10px solid rgba(255, 67, 54, 1);}

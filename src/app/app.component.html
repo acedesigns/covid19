@@ -1,0 +1,154 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="#"> {{ title }}  </a>
+    <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button"> @anele_ace </button>
+        </form>
+    </div>
+</nav>
+
+
+<div class="jumbotron">
+
+    <h3> {{ title }} WorldWide Pandemic </h3>
+
+    <p> WHO is gathering the latest international multilingual scientific findings and knowledge on COVID-19. The global literature cited in the WHO COVID-19 database is updated daily (Monday through Friday) from searches of bibliographic databases, hand searching, and the addition of other expert-referred scientific articles.</p>
+
+</div>
+
+
+
+<div class="row">
+    <div class="col-sm"> &nbsp; </div>
+
+    <div class="col-sm"> &nbsp; </div>
+
+    <div class="col-sm"> &nbsp; </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <mat-card class="card-infected">
+                <mat-card-header>
+
+                    <mat-card-title> Infected </mat-card-title>
+                    <mat-card-subtitle>{{ confirmedCases?.value | number }}</mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <p>
+                        Number of active cases of COVID-19.
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button mat-raised-button mat-button color="primary"> SHARE </button>
+                </mat-card-actions>
+
+                <mat-card-footer>
+                    <p> {{ lastUpdate | date:'dd-LLL-yyy : HH:mm' }} </p>
+                </mat-card-footer>
+            </mat-card>
+        </div>
+
+        <div class="col-sm">
+            <mat-card class="card-recovered">
+                <mat-card-header>
+                    <mat-card-title> Recovered </mat-card-title>
+                    <mat-card-subtitle>{{ recoveredCases?.value | number }}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <p>
+                        Number of recoveries from COVID-19.
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button mat-raised-button mat-button color="accent"> SHARE </button>
+                </mat-card-actions>
+                <mat-card-footer>
+                    <p> {{ lastUpdate | date:'dd-LLL-yyy : HH:mm' }} </p>
+                </mat-card-footer>
+            </mat-card>
+        </div>
+
+        <div class="col-sm">
+            <mat-card class="card-deaths">
+                <mat-card-header>
+                    <mat-card-title> Deaths </mat-card-title>
+                    <mat-card-subtitle> {{ deathCases?.value | number }} </mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <p>
+                        Number of deaths caused by COVID-19.
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button mat-raised-button mat-button color="warn">SHARE</button>
+                </mat-card-actions>
+                <mat-card-footer>
+                    <p> {{ lastUpdate | date:'dd-LLL-yyy : HH:mm' }} </p>
+                </mat-card-footer>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm"> &nbsp; </div>
+
+        <div class="col-sm">
+            <div class="form-group"></div>
+
+            <mat-form-field>
+                <mat-select placeholder="Select A Country" (selectionChange)="onCountrySelection($event.value)">
+                    <mat-option [value]="global"> Global </mat-option>
+
+                    <mat-option *ngFor="let country of myCountries" [value]="country.iso2">
+                        {{ country.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-sm"> &nbsp; </div>
+    </div>
+</div>
+
+
+
+
+<div class="form-group"></div>
+<div class="form-group"></div>
+<div class="form-group"></div>
+
+<div class="row">
+    <canvas id="lineChart" ></canvas>
+
+    <!--
+    <canvas id="barChart"></canvas>
+
+    <canvas id="pieChart"></canvas>
+    -->
+</div>
