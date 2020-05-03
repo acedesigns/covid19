@@ -18,7 +18,7 @@ import { CountUpDirective } from '../directives/count-up.directive';
 import { AppComponent } from './app.component';
 
 @NgModule({
-    declarations: [ AppComponent, ],
+    declarations: [ AppComponent, CountUpDirective],
 
     imports: [
         BrowserModule, BrowserAnimationsModule,
@@ -27,7 +27,7 @@ import { AppComponent } from './app.component';
 
     ],
 
-    providers: [ CountUpDirective ],
+    providers: [  ],
 
     bootstrap: [AppComponent]
 })

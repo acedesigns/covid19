@@ -123,7 +123,7 @@
 
             <mat-form-field>
                 <mat-select placeholder="Select A Country" (selectionChange)="onCountrySelection($event.value)">
-                    <mat-option [value]="global"> Global </mat-option>
+                    <mat-option [value]=" '' "> Global </mat-option>
 
                     <mat-option *ngFor="let country of myCountries" [value]="country.iso2">
                         {{ country.name}}
