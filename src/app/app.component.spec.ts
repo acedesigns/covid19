@@ -1,31 +1,59 @@
-import { TestBed, async } from '@angular/core/testing';
+
+/* =======================================================
+ *
+ * Created by anele on 2020/05/02.
+ * @anele_ace
+ *
+ * =======================================================
+ */
+
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
+import { configureTestSuite } from 'ng-bullet';
+
+
 import { AppComponent } from './app.component';
+import { Covid19Service } from './app.service';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  });
+    let component: AppComponent;
+    let fixture: ComponentFixture<AppComponent>;
 
-  it(`should have as title 'covid19'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('covid19');
-  });
+    const covidService = jasmine.createSpyObj('Covid19Service', ['getResults', 'getAllCountries', 'getDailyStats']);
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to covid19!');
-  });
+
+    configureTestSuite(() => {
+
+
+        TestBed.configureTestingModule({
+
+            imports : [ HttpClientTestingModule ],
+
+            providers : [
+                //{ provide: Covid19Service, useValue: covidService }
+            ],
+
+            schemas: [ NO_ERRORS_SCHEMA ],
+
+            declarations: [ AppComponent ]
+        });
+
+        fixture = TestBed.createComponent(AppComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+
+    });
+
+    afterEach(() => { fixture.destroy(); });
+
+
+    it('should create the app', () => {
+        expect(component).toBeTruthy();
+    });
+
+
+
 });

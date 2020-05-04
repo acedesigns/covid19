@@ -7,17 +7,11 @@
  * =======================================================
  */
 
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as  Chart from 'chart.js';
-import { Covid19ervice } from './app.service';
-import { CountUpOptions, CountUp } from 'countup.js'
+import { Covid19Service } from './app.service';
 
-
-export interface Countries {
-    name: string;
-    iso2: string;
-    iso3: string;
-}
+import { CountriesModel } from './app.model';
 
 
 @Component({
@@ -30,8 +24,6 @@ export class AppComponent implements OnInit {
 
     title = 'Covid 19 ';
 
-    opts: CountUpOptions;
-
     LineChart   = [];
     BarChart    = [];
     confirmedCases: any;
@@ -40,16 +32,16 @@ export class AppComponent implements OnInit {
     lastUpdate: Date;
 
 
-    myCountries: Countries;
+    myCountries: Array<CountriesModel>;
     selectedCountry: string = '';
 
-    constructor( public rest:Covid19ervice ) { }
+    constructor( public rest:Covid19Service ) { }
 
 
     ngOnInit () {
         this.getCovidResults(this.selectedCountry);
 
-        this.getCovidCountries();
+        this.getCountries();
         this.getChartDetails();
 
     }
@@ -209,7 +201,8 @@ export class AppComponent implements OnInit {
         );
     }
 
-    getCovidCountries() {
+
+    getCountries() {
         this.rest.getAllCountries().subscribe(
             data => {
                 this.myCountries = data;
@@ -221,11 +214,5 @@ export class AppComponent implements OnInit {
         )
     }
 
-    private useOptions() {
-        this.opts = {
-            decimalPlaces: 2,
-            separator: ':',
-            duration: 5
-        };
-    }
+
 }

@@ -19,19 +19,15 @@ const httpOptions = {
 
 const APIURL  = 'https://covid19.mathdro.id/api';
 
-export interface APIResponse {
-    confirmed   : any,
-    recovered   : any,
-    deaths      : number,
-    lastUpdate  : Date
-}
+import { APIResponse } from './app.model';
 
 @Injectable({providedIn: 'root'})
 
-export class Covid19ervice {
+export class Covid19Service {
 
 
     constructor( private http: HttpClient ) { }
+
 
     getResults(country): Observable<any> {
 
@@ -51,6 +47,7 @@ export class Covid19ervice {
             ));
     }
 
+
     getAllCountries() {
         try {
             return this.http.get(`${APIURL}/countries`).pipe(
@@ -62,6 +59,7 @@ export class Covid19ervice {
             console.log(error)
         }
     }
+
 
     getDailyStats() {
         try {

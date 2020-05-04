@@ -17,3 +17,22 @@
 
 .card-deaths {
   border-bottom: 10px solid rgba(255, 67, 54, 1);}
+
+/*
+*
+*   min-width
+*   Rules applied for any browser width greater than the value defined in the query.
+*
+*
+*   max-width
+*   Rules applied for any browser width less than the value defined in the query.
+*
+-------------------------------------------------- */
+
+@media screen
+and ( min-width: 320px )
+and ( max-width: 812px ) {
+
+  .mat-card-footer { padding: 8px 12px; }
+  .mat-form-field { width: 100%; }
+}

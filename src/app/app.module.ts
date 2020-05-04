@@ -13,12 +13,11 @@ import { MatCardModule, MatButtonModule, MatSelectModule } from '@angular/materi
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-import { CountUpDirective } from '../directives/count-up.directive';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
-    declarations: [ AppComponent, CountUpDirective],
+    declarations: [ AppComponent ],
 
     imports: [
         BrowserModule, BrowserAnimationsModule,
