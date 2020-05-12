@@ -7,17 +7,20 @@
  * =======================================================
  */
 
-import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatCardModule, MatButtonModule, MatSelectModule } from '@angular/material';
-import { HttpClientModule } from '@angular/common/http';
+
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule, MatButtonModule, MatSelectModule } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
+import { CountUpDirective } from '../directives/countup';
 
 @NgModule({
-    declarations: [ AppComponent ],
+
+    declarations: [ AppComponent, CountUpDirective ],
 
     imports: [
         BrowserModule, BrowserAnimationsModule,
@@ -25,6 +28,8 @@ import { AppComponent } from './app.component';
         MatCardModule, MatButtonModule, MatSelectModule,
 
     ],
+
+    exports: [ CountUpDirective ],
 
     providers: [  ],
 

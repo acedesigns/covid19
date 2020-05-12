@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" href="#"> {{ title }}  </a>
+    <a class="navbar-brand" href="/"> {{ title }}  </a>
     <button class="navbar-toggler" type="button"
             data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false"
@@ -16,7 +16,7 @@
             </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button"> @anele_ace </button>
+            <a href="https://twitter.com/anele_ace" target="_blank" class="btn btn-outline-success my-2 my-sm-0"> @anele_ace </a>
         </form>
     </div>
 </nav>
@@ -28,7 +28,8 @@
 
     <p> WHO is gathering the latest international multilingual scientific findings and knowledge on COVID-19.</p>
 
-    <p> Built by Anele 'ace' M </p>
+    <p> Built by <a href="https://twitter.com/anele_ace" target="_blank" class="my-2 my-sm-0"> Anele 'ace' M </a>
+         </p>
 
 </div>
 
@@ -49,7 +50,7 @@
                 <mat-card-header>
 
                     <mat-card-title> Infected </mat-card-title>
-                    <mat-card-subtitle>{{ confirmedCases?.value | number }}</mat-card-subtitle>
+                    <mat-card-subtitle [countUp]="confirmedCases?.value"> {{ confirmedCases?.value | number }} </mat-card-subtitle>
 
                 </mat-card-header>
 
@@ -73,7 +74,7 @@
             <mat-card class="card-recovered">
                 <mat-card-header>
                     <mat-card-title> Recovered </mat-card-title>
-                    <mat-card-subtitle>{{ recoveredCases?.value | number }}</mat-card-subtitle>
+                    <mat-card-subtitle [countUp]="recoveredCases?.value">{{ recoveredCases?.value | number }}</mat-card-subtitle>
                 </mat-card-header>
 
                 <mat-card-content>
@@ -95,7 +96,7 @@
             <mat-card class="card-deaths">
                 <mat-card-header>
                     <mat-card-title> Deaths </mat-card-title>
-                    <mat-card-subtitle> {{ deathCases?.value | number }} </mat-card-subtitle>
+                    <mat-card-subtitle [countUp]="deathCases?.value"> {{ deathCases?.value | number }} </mat-card-subtitle>
                 </mat-card-header>
 
                 <mat-card-content>
