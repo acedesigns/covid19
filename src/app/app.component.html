@@ -60,10 +60,6 @@
                     </p>
                 </mat-card-content>
 
-                <mat-card-actions>
-                    <button mat-raised-button mat-button color="primary"> SHARE </button>
-                </mat-card-actions>
-
                 <mat-card-footer>
                     <p> {{ lastUpdate | date:'dd-LLL-yyy : HH:mm' }} </p>
                 </mat-card-footer>
@@ -83,9 +79,6 @@
                     </p>
                 </mat-card-content>
 
-                <mat-card-actions>
-                    <button mat-raised-button mat-button color="accent"> SHARE </button>
-                </mat-card-actions>
                 <mat-card-footer>
                     <p> {{ lastUpdate | date:'dd-LLL-yyy : HH:mm' }} </p>
                 </mat-card-footer>
@@ -101,13 +94,10 @@
 
                 <mat-card-content>
                     <p>
-                        Number of deaths caused by COVID-19.
+                        Number of deaths by COVID-19.
                     </p>
                 </mat-card-content>
 
-                <mat-card-actions>
-                    <button mat-raised-button mat-button color="warn">SHARE</button>
-                </mat-card-actions>
                 <mat-card-footer>
                     <p> {{ lastUpdate | date:'dd-LLL-yyy : HH:mm' }} </p>
                 </mat-card-footer>
@@ -129,7 +119,7 @@
                     <mat-option [value]=" '' "> Global </mat-option>
 
                     <mat-option *ngFor="let country of myCountries" [value]="country.iso2">
-                        {{ country.name}}
+                        {{ country.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -152,14 +142,21 @@
 <div class="form-group"></div>
 <div class="form-group"></div>
 
-<div class="row">
+<div class="container">
+    <div class="row mb-5">
 
-    <!--
-    <canvas id="lineChart" ></canvas>
+        <div style="width: 100%; height: 360px;" *ngIf="linecart else loaded">
+            <canvas id="lineChart" ></canvas>
+        </div>
 
-    <!--
-    <canvas id="barChart"></canvas>
 
-    <canvas id="pieChart"></canvas>
-    -->
+        <ng-template #loaded>
+            <canvas id="barChart"></canvas>
+        </ng-template>
+
+    </div>
 </div>
+
+<div class="form-group mb-5"></div>
+<div class="form-group"></div>
+<div class="form-group"></div>

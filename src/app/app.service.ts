@@ -39,10 +39,7 @@ export class Covid19Service {
 
         return this.http.get<APIResponse>(changed).pipe(
             map( (response: APIResponse)  => {
-                const modified = { confirmed : response.confirmed, recovered : response.recovered,
-                    deaths : response.deaths, lastUpdate : response.lastUpdate };
-
-                return modified;
+                return { confirmed : response.confirmed, recovered : response.recovered, deaths : response.deaths, lastUpdate : response.lastUpdate };
                 }
             ));
     }

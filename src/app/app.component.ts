@@ -4,6 +4,8 @@
  * Created by anele on 2020/05/02.
  * @anele_ace
  *
+ * https://github.com/adrianhajdin/project_corona_tracker
+ *
  * =======================================================
  */
 
@@ -34,48 +36,44 @@ export class AppComponent implements OnInit {
 
     myCountries: Array<CountriesModel>;
     selectedCountry: string = '';
+    linecart: boolean = true;
 
-    constructor( public rest:Covid19Service ) { }
+    constructor( public rest: Covid19Service ) { }
 
 
     ngOnInit () {
         this.getCovidResults(this.selectedCountry);
 
         this.getCountries();
-        this.getChartDetails();
+        this.getChartDetails(this.selectedCountry);
 
     }
 
-    drawBarChart(data) {
+    drawBarChart(data, country) {
         this.BarChart = new Chart('barChart', {
             type: 'bar',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: ["Infected", "Recovered", "Deaths"],
                 datasets: [{
                     label: '# of Votes',
-                    data: [9,7 , 3, 5, 2, 10],
+                    data: [data.confirmed.value, data.recovered.value, data.deaths.value],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
+                        'rgba(0, 0, 255, 0.5)',
+                        'rgba(0, 255, 0, 0.5)',
+                        'rgba(255, 0, 0, 0.5)',
                     ],
                     borderColor: [
                         'rgba(255,99,132,1)',
                         'rgba(54, 162, 235, 1)',
                         'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
                     ],
                     borderWidth: 1
                 }]
             },
             options: {
+                legend: { display:false },
                 title:{
-                    text:"Bar Chart",
+                    text:`Current State in ${country}`,
                     display:true
                 },
                 scales: {
@@ -134,55 +132,33 @@ export class AppComponent implements OnInit {
 
     onCountrySelection(country) {
         this.getCovidResults(country);
+        this.getChartDetails(country);
     }
 
-    getChartDetails() {
-        this.rest.getDailyStats().subscribe(
-            data => {
-                this.LineChart = new Chart('lineChart', {
-                    type: 'line',
-                    data: {
-                        labels: data.map( ({ date }) => date ),
-                        datasets: [
-                            {
-                                label:'Infected',
-                                data: data.map( ({confirmed}) => confirmed ),
-                                fill:true,
-                                lineTension:0.2,
-                                borderColor:"blue",
-                                borderWidth: 1
-                            },
+    getChartDetails(country) {
+        if (country) {
+            this.linecart = false;
+            this.rest.getResults(country).subscribe(
+                data => {
+                    this.drawBarChart(data, country);
+                },
+                error => { console.log("getCovidResults"); console.log(error) },
 
-                            {
-                                label:'Deaths',
-                                data: data.map( ( {deaths} ) => deaths ),
-                                fill:true,
-                                lineTension:0.2,
-                                borderColor:"red",
-                                backgroundColor : 'rgba(255,0,0,05)',
-                                borderWidth: 1
-                            },
-                        ]
-                    },
-                    options: {
-                        title:{
-                            text:"Covid 19 Worldwide",
-                            display:true
-                        },
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true
-                                }
-                            }]
-                        }
-                    }
-                });
-            },
-            error => { console.log("subscribe"); console.log(error) },
+                () => { }
+            );
+        } else {
+            this.linecart = true;
+            this.rest.getDailyStats().subscribe(
+                data => {
+                    this.drawLineChart(data);
+                },
+                error => { console.log("subscribe"); console.log(error) },
 
-            () => { }
-        );
+                () => { }
+            );
+        }
+
+
     }
 
 
